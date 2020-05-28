@@ -8,6 +8,9 @@ copy/paste the followings :
 
 
 
+
   wget https://raw.githubusercontent.com/BaptisS/oci_clone_seclist/master/cloneseclist.sh
+  
   chmod +x cloneseclist.sh 
+  
   ./cloneseclist.sh 
