@@ -1,11 +1,9 @@
 #!/bin/bash
-
-#Variables (to be defined before script executio)
-#srcseclist_id=ocid1.securitylist.oc1.abcdef
-#dstseclist_id=ocid1.securitylist.oc1.abcdef 
-echo "Please provide the source security list OCID :" 
+echo ""
+echo "Please provide the SOURCE security list OCID :" 
 read srcseclist_id
-echo "Please provide the destination security list OCID :"
+echo ""
+echo "Please provide the DESTINATION security list OCID :"
 echo "Important : Destination Security list will be overwritten with the content of the source SL" 
 read dstseclist_id
 
@@ -19,3 +17,5 @@ echo $srcseclist_data | jq '.[] | ."egress-security-rules"' >> src_egress.json
 
 oci network security-list update --security-list-id $dstseclist_id --ingress-security-rules file://src_ingress.json  --egress-security-rules file://src_egress.json --force
 
+rm -f src_ingress.json
+rm -f src_egress.json
