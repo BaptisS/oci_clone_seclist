@@ -3,6 +3,11 @@
 #Variables (to be defined before script executio)
 #srcseclist_id=ocid1.securitylist.oc1.abcdef
 #dstseclist_id=ocid1.securitylist.oc1.abcdef 
+echo "Please provide the source security list OCID :" 
+read srcseclist_id
+echo "Please provide the destination security list OCID :"
+echo "Important : Destination Security list will be overwritten with the content of the source SL" 
+read dstseclist_id
 
 rm -f src_ingress.json
 rm -f src_egress.json
