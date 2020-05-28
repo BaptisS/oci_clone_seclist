@@ -1,5 +1,8 @@
-srcseclist_id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaabd6fdwc46tblehygavo3ohgd76jw6myobarbc2d7w55v6t6ij5ma
-dstseclist_id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaani7redyemyyfwqnd5nt2qkwe257j2az2le4d4mddexokjgwi7ecq 
+#!/bin/bash
+
+#Variables (to be defined before script executio)
+#srcseclist_id=ocid1.securitylist.oc1.abcdef
+#dstseclist_id=ocid1.securitylist.oc1.abcdef 
 
 rm -f src_ingress.json
 rm -f src_egress.json
