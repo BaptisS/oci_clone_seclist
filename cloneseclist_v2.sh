@@ -1,21 +1,28 @@
+
+
 #!/bin/bash
 echo ""
-echo "Please provide the SOURCE security list OCID :" 
-read srcseclist_id
+echo "Please provide the SOURCE Security List OCID :" 
+read srcsl_id
 echo ""
-echo "Please provide the DESTINATION security list OCID :"
-echo "Important : Destination Security list will be overwritten with the content of the source SL" 
-read dstseclist_id
+echo "Please provide the DESTINATION route table OCID :"
+echo "Important : Destination route table  will be overwritten with the content of the source RT" 
+read dstsl_id
 
-rm -f src_ingress.json
-rm -f src_egress.json
+rm -f src_sl_egress.json
+rm -f src_sl_ingress.json 
 
-srcseclist_data=$(oci network security-list get --security-list-id $srcseclist_id)
-#echo "[" >> src_ingress.json
-echo $srcseclist_data | jq '.[] | ."ingress-security-rules"' >> src_ingress.json 
-echo $srcseclist_data | jq '.[] | ."egress-security-rules"' >> src_egress.json 
+srcsl_data=$(oci network security-list get --security-list-id $srcsl_id)
+echo $srcsl_data | jq '.data."egress-security-rules"'  > src_sl_egress.json 
+echo $srcsl_data | jq '.data."ingress-security-rules"' > src_sl_ingress.json 
 
-oci network security-list update --security-list-id $dstseclist_id --ingress-security-rules file://src_ingress.json  --egress-security-rules file://src_egress.json --force
+sed -i "s/destination-type/destinationType/g" src_sl_*.json 
+sed -i "s/source-type/sourceType/g" src_sl_*.json 
+sed -i "s/icmp-options/icmpOptions/g" src_sl_*.json 
+sed -i "s/is-stateless/isStateless/g" src_sl_*.json 
+sed -i "s/tcp-options/tcpOptions/g" src_sl_*.json 
+sed -i "s/destination-port-range/destinationPortRange/g" src_sl_*.json
+sed -i "s/source-port-range/sourcePortRange/g" src_sl_*.json
+sed -i "s/udp-options/udpOptions/g" src_sl_*.json
 
-rm -f src_ingress.json
-rm -f src_egress.json
+oci network security-list update --security-list-id $dstsl_id --egress-security-rules file://src_sl_egress.json --ingress-security-rules file://src_sl_ingress.json --force
