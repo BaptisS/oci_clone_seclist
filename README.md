@@ -6,8 +6,9 @@ Destination Security List must exist (empty).
 Copy/paste the followings commands : 
 
 ```
-  rm -f cloneseclist.sh
-  wget https://raw.githubusercontent.com/BaptisS/oci_clone_seclist/master/cloneseclist.sh
-  chmod +x cloneseclist.sh 
-  ./cloneseclist.sh 
+  rm -f cloneseclist_v2.sh
+  wget https://raw.githubusercontent.com/BaptisS/oci_clone_seclist/master/cloneseclist_v2.sh
+  chmod +x cloneseclist_v2.sh 
+  ./cloneseclist_v2.sh 
 ```
+https://raw.githubusercontent.com/BaptisS/oci_clone_seclist/master/cloneseclist_v2.sh
